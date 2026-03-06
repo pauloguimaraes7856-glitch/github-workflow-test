@@ -1,1 +1,17 @@
+name: Update Comment Workflow
 
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: This comment was automatically created by GitHub Actions.
